@@ -1,0 +1,14 @@
+# modules
+node_modules
+
+# dist
+dist
+
+# bit
+components
+inline_components
+.bit
+
+# editor specific
+.vscode
+
