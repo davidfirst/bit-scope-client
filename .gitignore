@@ -1,6 +1,9 @@
 # modules
 node_modules
 
+# npm
+npm-debug.log
+
 # dist
 dist
 
