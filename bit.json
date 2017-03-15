@@ -4,10 +4,14 @@
         "spec": "spec.js"
     },
     "env": {
-        "compiler": "none",
-        "tester": "none"
+        "compiler": "bit.envs/compilers/flow::2",
+        "tester": "bit.envs/testers/mocha::6"
     },
     "dependencies": {
-        "bit.utils/global/is-string": "1"
+        "bit.utils/global/is-string": "1",
+        "bit.utils/string/to-base64": "1",
+        "bit.utils/global/is-number": "1",
+        "bit.utils/ssh/parse-url": "1",
+        "bit.utils/string/remove-new-lines": "1"
     }
 }
