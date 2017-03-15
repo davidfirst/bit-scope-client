@@ -2,7 +2,7 @@
   "name": "bit-scope-client",
   "version": "1.0.0",
   "description": "A module for consuming bit components out of a remote scope",
-  "main": "index.js",
+  "main": "dist/main.js",
   "scripts": {
     "flow": "flow; test $? -eq 0 -o $? -eq 2",
     "lint": "eslint src/** && flow check",
@@ -18,8 +18,14 @@
     "babel-plugin-transform-flow-strip-types": "^6.22.0",
     "babel-preset-env": "^1.2.1",
     "eslint": "^3.15.0",
-    "eslint-config-standard": "^7.0.1",
-    "eslint-config-standard-flow": "^1.0.1",
-    "flow-bin": "^0.41.0"
+    "eslint-config-airbnb": "^14.1.0",
+    "eslint-config-airbnb-flow": "^1.0.2",
+    "flow-bin": "^0.41.0",
+    "jest": "^19.0.2"
+  },
+  "dependencies": {
+    "bit-js": "^0.2.0",
+    "sequest": "^0.9.0",
+    "user-home": "^2.0.0"
   }
 }

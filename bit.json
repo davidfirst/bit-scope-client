@@ -7,5 +7,7 @@
         "compiler": "none",
         "tester": "none"
     },
-    "dependencies": {}
+    "dependencies": {
+        "bit.utils/global/is-string": "1"
+    }
 }
