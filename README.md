@@ -46,7 +46,7 @@ The return value is a promise with an Array of objects contains the main Compone
             "username": "example username",
             "email": "exmaple@email.com"
         },
-        "dependencies": [], // an array of component ids
+        "dependencies": ["an array of component ids"],
         "docs": [
             {
                 "name": "function name",
@@ -69,29 +69,29 @@ The return value is a promise with an Array of objects contains the main Compone
                         "code": "identified exampels"
                     }
                 ],
-                "static": true // boolean
+                "static": true
             }
         ],
-        "ci": {}, // ci object if the ci run
+        "ci": { "ci object if the ci run": "example"},
         "specsResults": {
             "tests": [
                 {
                     "title": "test description",
-                    "pass": true, // boolean
-                    "err": null, // if there is an error a serialized version will be here
-                    "duration": 2 // number - the duration of the tests
+                    "pass": true,
+                    "err": null,
+                    "duration": 2
                 }
             ],
             "stats": {
-                "start": "2017-02-15T17:03:04.095Z", // start date
-                "end": "2017-02-15T17:03:04.104Z", // end date
-                "duration": 9 // number - the duration of the tests
+                "start": "2017-02-15T17:03:04.095Z",
+                "end": "2017-02-15T17:03:04.104Z",
+                "duration": 9
             },
-            "pass": true // boolean
+            "pass": true
         },
         "flattenedDependencies": [],
         "packageDependencies": {},
-        "version": "0" // string (represent a number)
+        "version": "0"
     },
     "dependencies": []
 }
