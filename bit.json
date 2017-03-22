@@ -12,6 +12,14 @@
         "bit.utils/string/to-base64": "1",
         "bit.utils/global/is-number": "1",
         "bit.utils/ssh/parse-url": "1",
-        "bit.utils/string/remove-new-lines": "1"
+        "bit.utils/string/remove-new-lines": "1",
+        "bit.utils/string/from-base64": "1",
+        "bit.utils/object/merge": "1",
+        "bit.utils/object/merge-all": "1",
+        "bit.utils/buffer/from": "15",
+        "bit.utils/object/values": "1",
+        "bit.utils/function/compose": "1",
+        "bit.utils/object/evolve": "2",
+        "bit.utils/object/group-by": "3"
     }
 }

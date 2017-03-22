@@ -1,10 +1,9 @@
 /** @flow */
 import sequest from 'sequest';
 import bit from 'bit-js';
-// import userHome from 'user-home';
-// import fs from 'fs';
-// import path from 'path';
 import keyGetter from './ssh-key-getter';
+import parseComponentObjects from './parse-component-objects';
+import populateComponent from './populate-component';
 
 import {
   RemoteScopeNotFound,
@@ -12,9 +11,6 @@ import {
   UnexpectedNetworkError,
   PermissionDenied,
   ComponentNotFound } from './exceptions';
-
-// import { BitIds, BitId } from '../../../bit-id';
-// import ConsumerComponent from '../../../consumer/component'; // TODO a way to serialze output
 
 type SSHUrl = {
   username: string,
@@ -24,7 +20,7 @@ type SSHUrl = {
 };
 
 const toBase64 = bit('string/to-base64');
-const fromBase64 = bit(); // TODO
+const fromBase64 = bit('string/from-base64');
 
 const ComponentObjects = null // TODO
 
@@ -103,15 +99,15 @@ module.exports = class ScopeSSHClient {
     });
   }
 
-  fetch(ids: string[], noDeps: bool = false): Promise<ComponentObjects[]> {
+  fetch(ids: string[], noDeps: bool = false): Promise<any> {
     let options = '';
     ids = ids.map(bitId => bitId.toString());
     if (noDeps) options = '-n';
     return this.exec(`_fetch ${options}`, ...ids)
       .then((str: string) => {
-        const components = unpack(str);
-        return components.map((raw) => {
-          return ComponentObjects.fromString(raw);
+        const rawComponents = unpack(str);
+        return rawComponents.map((objects) => {
+          return populateComponent(parseComponentObjects(objects));
         });
       });
   }
@@ -125,7 +121,7 @@ module.exports = class ScopeSSHClient {
     return `${this.username}@${this.host}:${this.port}`;
   }
 
-  connect(sshUrl: SSHUrl, key: ?string): Promise<ScopeSSHClient> {
+  connect(key: ?string): Promise<ScopeSSHClient> {
     this.connection = sequest.connect(this.composeConnectionUrl(), {
       privateKey: keyGetter(key)
     });

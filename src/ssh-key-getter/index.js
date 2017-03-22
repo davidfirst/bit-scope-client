@@ -1,4 +1,7 @@
 // @Flow
+import path from 'path';
+import userHome from 'user-home';
+import fs from 'fs';
 
 function getDirectory(): string {
   if (process.platform === 'win32' && process.env.LOCALAPPDATA) {
