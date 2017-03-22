@@ -1,22 +1,28 @@
 /* @flow */
 import SSH from './ssh';
+import getRemote from './remote-getter';
+import bit from 'bit-js';
+import { ID_DELIMITER } from './constants';
 
-const defaultUrl = 'ssh://bit@hub-stg.bitsrc.io:';
-const getRemote = (scope) => defaultUrl + scope; // TODO - write strategy for multiple remotes
+const groupBy = bit('object/group-by');
+const mapObject = bit('object/map');
+const values = bit('object/values');
+const flatMap = bit('array/flat-map');
 
-const importFromScope = ({ scope, ids }: { scope: string, ids: string[] }):
-Promise<{ component: any, dependencies: any }> => {
-  return SSH.fromUrl(getRemote(scope)).connect()
+function importFromScope (ids: string[], scope: string):
+Promise<{ component: any, dependencies: any }> {
+  const remote = getRemote(scope);
+  return SSH.fromUrl(remote).connect()
   .then(client => client.fetch(ids));
 };
 
 const importComponents = (componentIds: string[]) => {
-  const groupedByScope = [{
-    scope: 'bit.utils',
-    ids: componentIds
-  }]; // TODO - a function that group ids by origin scopes
+  const groupedByScope = groupBy(componentIds, (id) => {
+    return id.split(ID_DELIMITER)[0];
+  });
 
-  return Promise.all(groupedByScope.map(importFromScope));
+  return Promise.all(values(mapObject(groupedByScope, importFromScope)))
+  .then((resultsByScope) => flatMap(resultsByScope, val => val));
 };
 
 module.exports = importComponents;

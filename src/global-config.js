@@ -1,7 +1,7 @@
 // @Flow
 import fs from 'fs';
 import path from 'path';
-import { GLOBAL_CONFIG, GLOBAL_CONFIG_FILE } from '../constants';
+import { GLOBAL_CONFIG, GLOBAL_CONFIG_FILE } from './constants';
 import bit from 'bit-js';
 
 const isString = bit('is-string');

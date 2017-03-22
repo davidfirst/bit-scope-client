@@ -20,6 +20,8 @@
         "bit.utils/object/values": "1",
         "bit.utils/function/compose": "1",
         "bit.utils/object/evolve": "2",
-        "bit.utils/object/group-by": "3"
+        "bit.utils/object/group-by": "3",
+        "bit.utils/object/map": "1",
+        "bit.utils/array/flat-map": "1"
     }
 }

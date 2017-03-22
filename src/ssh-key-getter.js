@@ -1,7 +1,9 @@
-// @Flow
+// @flow
 import path from 'path';
 import userHome from 'user-home';
 import fs from 'fs';
+import { CFG_SSH_KEY_FILE_KEY, DEFAULT_SSH_KEY_FILE } from './constants';
+import { getSync } from './global-config';
 
 function getDirectory(): string {
   if (process.platform === 'win32' && process.env.LOCALAPPDATA) {
@@ -26,9 +28,6 @@ const GLOBAL_CONFIG_FILE = 'config.json';
 function getPath() {
   return path.join(GLOBAL_CONFIG, GLOBAL_CONFIG_FILE);
 }
-
-import { CFG_SSH_KEY_FILE_KEY, DEFAULT_SSH_KEY_FILE } from '../constants';
-import { getSync } from './global-config';
 
 function getPathToIdentityFile() {
   const identityFile = getSync(CFG_SSH_KEY_FILE_KEY);

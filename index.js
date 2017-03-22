@@ -1,5 +1,5 @@
 const importer = require('./dist/main');
-const mockBitId = ['bit.utils/array/flat-map', 'bit.utils/array/diff', 'bit.utils/empty']; // maybe add :: latest if needed
+const mockBitId = ['bit.utils/array/flat-map', 'bit.promise/global/promisify', 'bit.utils/array/diff']; // maybe add :: latest if needed
 importer(mockBitId).then((componentDependencies) => {
   console.log(componentDependencies);
 });
