@@ -122,8 +122,8 @@ The return value is a promise with an Array of objects contains the main Compone
         "log": {
             "message": "initial commit",
             "date": "1487178184111",
-            "username": "Ran Mizrahi",
-            "email": "ran@cocycles.com"
+            "username": "USERNAME",
+            "email": "USERNAME@gmail.com"
         },
         "dependencies": [],
         "docs": [
