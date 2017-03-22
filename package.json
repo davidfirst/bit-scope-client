@@ -1,6 +1,6 @@
 {
   "name": "bit-scope-client",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A module for consuming bit components out of a remote scope",
   "main": "dist/main.js",
   "scripts": {
