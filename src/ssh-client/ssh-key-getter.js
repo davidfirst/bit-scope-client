@@ -2,8 +2,8 @@
 import path from 'path';
 import userHome from 'user-home';
 import fs from 'fs';
-import { CFG_SSH_KEY_FILE_KEY, DEFAULT_SSH_KEY_FILE } from './constants';
-import { getSync } from './global-config';
+import { CFG_SSH_KEY_FILE_KEY, DEFAULT_SSH_KEY_FILE } from '../constants';
+import { globalConfigGet } from '../global-config';
 
 function getDirectory(): string {
   if (process.platform === 'win32' && process.env.LOCALAPPDATA) {
@@ -30,7 +30,7 @@ function getPath() {
 }
 
 function getPathToIdentityFile() {
-  const identityFile = getSync(CFG_SSH_KEY_FILE_KEY);
+  const identityFile = globalConfigGet(CFG_SSH_KEY_FILE_KEY);
   return identityFile || DEFAULT_SSH_KEY_FILE;
 }
 

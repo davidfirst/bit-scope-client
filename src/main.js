@@ -1,6 +1,6 @@
 /* @flow */
-import SSH from './ssh';
-import getRemote from './remote-getter';
+import sshClient from './ssh-client';
+import getRemote from './remote-getter/';
 import bit from 'bit-js';
 import { ID_DELIMITER } from './constants';
 
@@ -12,7 +12,8 @@ const flatMap = bit('array/flat-map');
 function importFromScope (ids: string[], scope: string):
 Promise<{ component: any, dependencies: any }> {
   const remote = getRemote(scope);
-  return SSH.fromUrl(remote).connect()
+
+  return sshClient.fromUrl(remote).connect()
   .then(client => client.fetch(ids));
 };
 

@@ -2,15 +2,15 @@
 import sequest from 'sequest';
 import bit from 'bit-js';
 import keyGetter from './ssh-key-getter';
-import parseComponentObjects from './parse-component-objects';
-import populateComponent from './populate-component';
+import parseComponentObjects from '../parse-component-objects';
+import populateComponent from '../populate-component';
 
 import {
   RemoteScopeNotFound,
   NetworkError,
   UnexpectedNetworkError,
   PermissionDenied,
-  ComponentNotFound } from './exceptions';
+  ComponentNotFound } from '../exceptions';
 
 type SSHUrl = {
   username: string,
@@ -21,8 +21,6 @@ type SSHUrl = {
 
 const toBase64 = bit('string/to-base64');
 const fromBase64 = bit('string/from-base64');
-
-const ComponentObjects = null // TODO
 
 const unpack = (str: string): Array<string> => fromBase64(str).split('+++');
 const isString = bit('is-string');
@@ -36,7 +34,7 @@ function absolutePath(path: string) {
 }
 
 function errorHandler(err, optionalId) {
-  return err;
+  return err; // TODO - format errors
   // switch (err.code) {
   //   default:
   //     return new UnexpectedNetworkError();
