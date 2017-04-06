@@ -1,7 +1,5 @@
 # bit-scope-client
 
-![wip](https://img.shields.io/badge/state-work%20in%20progress-orange.svg)
-
 The bit scope client has only one function in its api. it gets an array of component ids and returns an array of component and dependencies objects.
 
 ```js
