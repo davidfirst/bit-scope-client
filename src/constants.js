@@ -17,8 +17,11 @@ function getCacheDirectory(): string {
   return getDirectory();
 }
 
+const packageFile = require('../package');
+
 export const CACHE_ROOT = getCacheDirectory();
 export const GLOBAL_CONFIG = path.join(CACHE_ROOT, 'config');
+export const BIT_VERSION = packageFile.version;
 export const GLOBAL_CONFIG_FILE = 'config.json';
 export const GLOBAL_REMOTES = 'global-remotes.json';
 export const NULL_BYTE = '\u0000';

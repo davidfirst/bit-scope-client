@@ -7,4 +7,5 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [unreleased]
 
-
+- change ssh protocol in order to support bit version 0.5.0 +
+- now returns responsed with payload and header each

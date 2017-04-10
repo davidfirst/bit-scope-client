@@ -1,6 +1,6 @@
 # bit-scope-client
 
-The bit scope client has only one function in its api. it gets an array of component ids and returns an array of component and dependencies objects.
+The bit scope client has only one function in its api. it gets an array of component ids and returns an array of responses with component and dependencies objects.
 
 ```js
 const bitScopeClient = require('bit-scope-client');
@@ -9,15 +9,18 @@ const componentIds = ['bit.utils/array/flat-map', 'bit.promise/global/promisify'
 
 bitScopeClient(componentIds)
 .then((componentDependenciesArr) => {
-  componentDependenciesArr.forEach((componentDependencies) => {
-    console.log(componentDependencies) // { component: Component, dependencies: Component[] }
+  componentDependenciesArr.forEach((response) => {
+    console.log(response.payload)
+    // { component: Component, dependencies: Component[] }
+    console.log(response.headers)
+    // { version: "0.5.0" }
   });
 });
 ```
 
 The return value is a promise with an Array of objects contains the main Component and its dependencies.
 
-## Component its an object with the following structure
+## Component is an object with the following structure
 ```json
 {
     "component": {
