@@ -22,16 +22,18 @@ export default (
 }
 
 function populateComponent(c, objects) {
-    let versionObject;
-    let versionNumber;
+  let versionObject;
+  let versionNumber;
 
-    values(c.versions).some((hash, index) => {
+  for (let currentVersion in c.versions) {
+    let hash = c.versions[parseInt(currentVersion)];
+
     if (objects[hash]) {
       versionObject = objects[hash];
-      versionNumber = index.toString();
-      return true;
+      versionNumber = currentVersion;
     }
-  });
+    break;
+  }
 
   delete c.versions;
   const componentVersion = merge(c, versionObject, { version: versionNumber });

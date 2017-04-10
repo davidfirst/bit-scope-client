@@ -92,7 +92,7 @@ The return value is a promise with an Array of objects contains the main Compone
         },
         "flattenedDependencies": [],
         "packageDependencies": {},
-        "version": "0"
+        "version": "1"
     },
     "dependencies": []
 }
@@ -194,7 +194,7 @@ The return value is a promise with an Array of objects contains the main Compone
         },
         "flattenedDependencies": [],
         "packageDependencies": {},
-        "version": "0"
+        "version": "1"
     },
     "dependencies": []
 }

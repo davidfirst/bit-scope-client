@@ -23,10 +23,6 @@ export default class Component {
     return [this.scope, this.box, this.name].join('/');
   }
 
-  listVersions(): number[] {
-    return Object.keys(this.versions).map(versionStr => parseInt(versionStr));
-  }
-
   static parse(contents: string): Component {
     return new Component(JSON.parse(contents));
   }
