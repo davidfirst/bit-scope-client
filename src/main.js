@@ -1,8 +1,11 @@
 /* @flow */
+import R from 'ramda';
+import path from 'path';
 import sshClient from './ssh-client';
 import getRemote from './remote-getter/';
 import bit from 'bit-js';
-import { ID_DELIMITER } from './constants';
+import { ID_DELIMITER, COMPONENTS_DIRNAME } from './constants';
+import modelOnFs from './model-on-fs';
 
 const groupBy = bit('object/group-by');
 const mapObject = bit('object/map');
@@ -16,7 +19,7 @@ Promise<{ component: any, dependencies: any }> {
 
   return sshClient.fromUrl(remote).connect()
   .then(client => client.fetch(ids));
-};
+}
 
 function isValidId(id: string): bool {
   if (!isString(id)) return false;
@@ -28,18 +31,29 @@ function isValidId(id: string): bool {
 
 const isInvalidId = id => !isValidId(id);
 
-const importComponents = (componentIds: string[]) => {
+function fetchComponents(componentIds: string[]) {
   const invalidIds = componentIds.filter(isInvalidId);
   if (invalidIds.length > 0) {
     throw Error(`the ids ${invalidIds.join(', ')} are invalid component ids`);
-  };
+  }
 
   const groupedByScope = groupBy(componentIds, (id) => {
     return id.split(ID_DELIMITER)[0];
   });
 
   return Promise.all(values(mapObject(groupedByScope, importFromScope)))
-  .then((resultsByScope) => flatMap(resultsByScope, val => val));
+    .then((resultsByScope) => flatMap(resultsByScope, val => val));
+}
+
+function writeComponents(responses) {
+  const components = R.unnest(responses.map(R.prop('payload')));
+  const projectRoot = process.cwd();
+  const targetComponentsDir = path.join(projectRoot, COMPONENTS_DIRNAME);
+  return modelOnFs(components, targetComponentsDir).then(() => components);
+}
+
+const importComponents = (componentIds: string[]) => {
+  return fetchComponents(componentIds).then(components => writeComponents(components));
 };
 
 module.exports = importComponents;
