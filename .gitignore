@@ -14,4 +14,4 @@ inline_components
 
 # editor specific
 .vscode
-
+.idea
