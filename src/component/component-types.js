@@ -48,6 +48,7 @@ export type ComponentObject = {
   packageDependencies: {[string]: string},
   dist: Source,
   impl: Source,
+  miscFiles: Array<Source>,
   specs: Source,
   specsResults: SpecsResults,
   docs: Doclet[],

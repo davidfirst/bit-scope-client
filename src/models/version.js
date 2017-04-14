@@ -12,6 +12,10 @@ export type VersionProps = {
     name: string,
     file: string
   };
+  miscFiles: ?Array<{
+    name: string,
+    file: string
+  }>;
   dist?: ?{
     name: string,
     file: string
@@ -41,6 +45,10 @@ export default class Version {
     name: string,
     file: string
   };
+  miscFiles: ?Array<{
+    name: string,
+    file: string
+  }>;
   dist: ?{
     name: string,
     file: string
@@ -63,6 +71,7 @@ export default class Version {
   constructor({
     impl,
     specs,
+    miscFiles,
     dist,
     compiler,
     tester,
@@ -76,6 +85,7 @@ export default class Version {
   }: VersionProps) {
     this.impl = impl;
     this.specs = specs;
+    this.miscFiles = miscFiles;
     this.dist = dist;
     this.compiler = compiler;
     this.tester = tester;
@@ -92,6 +102,7 @@ export default class Version {
     const {
       impl,
       specs,
+      miscFiles,
       dist,
       compiler,
       tester,
@@ -108,6 +119,7 @@ export default class Version {
       impl,
       specs: specs || null,
       dist: dist || null,
+      miscFiles: miscFiles || null,
       compiler: compiler || null,
       tester: tester || null,
       log,
