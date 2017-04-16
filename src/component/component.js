@@ -36,6 +36,7 @@ export default class Component {
   packageDependencies: {[string]: string};
   dist: ?Dist;
   impl: Source;
+  miscFiles: Source[];
   specs: Source;
   specsResults: SpecsResults;
   docs: Doclet[];
@@ -56,6 +57,7 @@ export default class Component {
     this.dist = componentObject.dist ? Dist.fromString(componentObject.dist.file) : null;
     this.impl = componentObject.impl || {};
     this.specs = componentObject.specs || {};
+    this.miscFiles = componentObject.miscFiles || [];
     this.specsResults = componentObject.specsResults;
     this.docs = componentObject.docs;
     this.log = componentObject.log;
@@ -78,6 +80,7 @@ export default class Component {
         this.writeBitJson(componentDir),
         writeSource(componentDir, this.impl.name, this.impl.file),
         writeSource(componentDir, this.specs.name, this.specs.file),
+        Promise.all(this.miscFiles.map(misc => writeSource(componentDir, misc.name, misc.file))),
         this.dist ? this.dist.write(componentDir, this.impl.name) : null,
         writeSource(componentDir, DEFAULT_LICENSE_FILENAME, this.license.file),
       ]);
@@ -88,6 +91,7 @@ export default class Component {
       sources: {
         impl: this.impl.name,
         spec: this.specs.name,
+        misc: this.miscFiles ? this.miscFiles.map(misc => misc.name) : []
       },
       env: {
         compiler: this.compiler ? this.compiler : NO_PLUGIN_TYPE,

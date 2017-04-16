@@ -1,1 +1,1 @@
-module.exports = reuqire('./dist/bit-json');
+module.exports = require('./dist/bit-json');

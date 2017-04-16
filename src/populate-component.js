@@ -31,8 +31,8 @@ function populateComponent(c, objects) {
     if (objects[hash]) {
       versionObject = objects[hash];
       versionNumber = currentVersion;
+      break;
     }
-    break;
   }
 
   delete c.versions;
@@ -40,6 +40,11 @@ function populateComponent(c, objects) {
 
   function populateSource(source) {
     return evolve({ file: (hash) => objects[hash]}, source)
+  }
+
+  function populateSources(sources) {
+    if (!sources || !sources.length) return [];
+    return sources.map(populateSource)
   }
 
   function populateImpl(c) {
@@ -50,6 +55,10 @@ function populateComponent(c, objects) {
     return evolve({ specs: populateSource }, c);
   }
 
+  function populateMisc(c) {
+    return evolve({ miscFiles: populateSources }, c);
+  }
+
   function populateDist(c) {
     return evolve({ dist: populateSource }, c);
   }
@@ -57,6 +66,7 @@ function populateComponent(c, objects) {
   return compose(
     populateImpl,
     populateSpec,
+    populateMisc,
     populateDist
   )(componentVersion);
 }

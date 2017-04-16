@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [unreleased]
 
+- support "misc" attribute for resources files
+- write components to the file system after fetching them
+
 ## [0.5.1]
 
 - fixed version 0 bug.

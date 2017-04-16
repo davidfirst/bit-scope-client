@@ -11,6 +11,7 @@ const composePath = p => path.join(p, BIT_JSON_NAME);
 class BitJson {
   impl: ?string;
   spec: ?string;
+  misc: ?string[];
   compiler: ?string;
   tester: ?string;
   dependencies: ?{[string]: string};
@@ -20,6 +21,7 @@ class BitJson {
   constructor(bitJson: Object) {
     this.impl = R.path(['sources', 'impl'], bitJson);
     this.spec = R.path(['sources', 'spec'], bitJson);
+    this.misc = R.path(['sources', 'misc'], bitJson);
     this.compiler = R.path(['env', 'compiler'], bitJson);
     this.tester = R.path(['env', 'tester'], bitJson);
     this.dependencies = R.prop('dependencies', bitJson);
@@ -50,6 +52,7 @@ class BitJson {
       sources: {
         impl: this.impl,
         spec: this.spec,
+        misc: this.misc,
       },
       env: {
         compiler: this.compiler,

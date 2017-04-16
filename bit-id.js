@@ -1,1 +1,1 @@
-module.exports = reuqire('./dist/bit-id');
+module.exports = require('./dist/bit-id');
