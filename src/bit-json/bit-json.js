@@ -1,10 +1,11 @@
 // @flow
-const R = require('ramda');
-const fs = require('fs-extra');
-const path = require('path');
-const { BIT_JSON_NAME, VERSION_DELIMITER, ID_DELIMITER } = require('../constants');
-const DependencyMap = require('../dependency-map');
-const { InvalidBitJsonException, DuplicateComponentException } = require('../exceptions');
+import R from 'ramda';
+import fs from 'fs-extra';
+import path from 'path';
+import { BIT_JSON_NAME, VERSION_DELIMITER, ID_DELIMITER } from '../constants';
+import DependencyMap from '../dependency-map';
+import InvalidBitJsonException from '../exceptions/invalid-bit-json';
+import DuplicateComponentException from '../exceptions/duplicate-component';
 
 const composePath = p => path.join(p, BIT_JSON_NAME);
 

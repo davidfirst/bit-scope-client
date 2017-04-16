@@ -4,7 +4,7 @@ const {
   DEFAULT_BOXNAME,
 } = require('../constants');
 
-const { InvalidComponentIdException } = require('../exceptions');
+const { InvalidComponentIdException } = require('../exceptions/invalid-bit-json');
 
 module.exports = ({ id, version }) => {
   if (!version) {

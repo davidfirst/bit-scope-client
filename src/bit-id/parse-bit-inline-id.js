@@ -1,5 +1,5 @@
 const { ID_DELIMITER, DEFAULT_BOXNAME } = require('../constants');
-const { InvalidComponentIdException } = require('../exceptions');
+const { InvalidComponentIdException } = require('../exceptions/invalid-component-id');
 
 module.exports = (bitId) => {
   const splitted = bitId.split(ID_DELIMITER);

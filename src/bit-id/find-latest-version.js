@@ -1,7 +1,7 @@
 const path = require('path');
 const glob = require('glob');
 const { BITS_DIRNAME } = require('../constants');
-const { VersionNotExistsException } = require('../exceptions');
+const { VersionNotExistsException } = require('../exceptions/version-not-exists');
 
 module.exports = ({ scope, box, name, consumerPath }) => {
   const dirToLookIn = path.join(
