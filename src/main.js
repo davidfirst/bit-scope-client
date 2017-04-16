@@ -6,6 +6,8 @@ import getRemote from './remote-getter/';
 import bit from 'bit-js';
 import { ID_DELIMITER, COMPONENTS_DIRNAME } from './constants';
 import modelOnFs from './model-on-fs';
+import Component from './component';
+import { type Response } from './ssh-client';
 
 const groupBy = bit('object/group-by');
 const mapObject = bit('object/map');
@@ -13,8 +15,7 @@ const values = bit('object/values');
 const flatMap = bit('array/flat-map');
 const isString = bit('is-string');
 
-function importFromScope (ids: string[], scope: string):
-Promise<{ component: any, dependencies: any }> {
+function importFromScope (ids: string[], scope: string): Promise<Response> {
   const remote = getRemote(scope);
 
   return sshClient.fromUrl(remote).connect()
@@ -31,7 +32,7 @@ function isValidId(id: string): bool {
 
 const isInvalidId = id => !isValidId(id);
 
-function fetchComponents(componentIds: string[]) {
+function fetchComponents(componentIds: string[]): Promise<Response[]> {
   const invalidIds = componentIds.filter(isInvalidId);
   if (invalidIds.length > 0) {
     throw Error(`the ids ${invalidIds.join(', ')} are invalid component ids`);
@@ -45,15 +46,22 @@ function fetchComponents(componentIds: string[]) {
     .then((resultsByScope) => flatMap(resultsByScope, val => val));
 }
 
-function writeComponents(responses) {
-  const components = R.unnest(responses.map(R.prop('payload')));
+function writeComponents(responses: Response[], customDir: ?string):
+Promise<{ component: Component, dependencies: Component[] }> {
+  const componentDependencies = R.unnest(responses.map(R.prop('payload')));
   const projectRoot = process.cwd();
-  const targetComponentsDir = path.join(projectRoot, COMPONENTS_DIRNAME);
-  return modelOnFs(components, targetComponentsDir).then(() => components);
+  const targetComponentsDir = customDir ? customDir : path.join(projectRoot, COMPONENTS_DIRNAME);
+  return modelOnFs(componentDependencies, targetComponentsDir).then(() => componentDependencies);
 }
 
-const importComponents = (componentIds: string[]) => {
-  return fetchComponents(componentIds).then(components => writeComponents(components));
+const importComponents = (componentIds: string[]):
+Promise<{ component: Component, dependencies: Component[] }> => {
+  return fetchComponents(componentIds)
+  .then(components => writeComponents(components));
 };
 
-module.exports = importComponents;
+module.exports = {
+  fetchComponents,
+  writeComponents,
+  importComponents,
+};

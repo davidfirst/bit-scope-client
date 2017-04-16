@@ -35,7 +35,14 @@ function absolutePath(path: string) {
   return path;
 }
 
-function buildCommandMessage(payload) {
+export type Response = {
+  payload: any,
+  headers: {
+    version: string
+  }
+}
+
+function buildCommandMessage(payload: any): Response {
   return {
     payload,
     headers: {

@@ -1,13 +1,20 @@
 # bit-scope-client
 
-The bit scope client has only one function in its api. it gets an array of component ids and returns an array of responses with component and dependencies objects.
+This pacakge is working with the [bit](https://github.com/teambit/bit) project, as a client for the scopes created by bit.
+You can use it to fetch bit components out of remote scopes and put them in the components directory.
+
+## API
+
+### fetchComponents (componentIds: string[]): Promise<Response[]>
+
+gets an array of component ids and returns an array of responses with component and dependencies objects as payload.
 
 ```js
-const bitScopeClient = require('bit-scope-client');
+const { fetchComponents } = require('bit-scope-client');
 
 const componentIds = ['bit.utils/array/flat-map', 'bit.promise/global/promisify', 'bit.utils/array/diff'];
 
-bitScopeClient(componentIds)
+fetchComponents(componentIds)
 .then((componentDependenciesArr) => {
   componentDependenciesArr.forEach((response) => {
     console.log(response.payload)
@@ -20,7 +27,18 @@ bitScopeClient(componentIds)
 
 The return value is a promise with an Array of objects contains the main Component and its dependencies.
 
-## Component is an object with the following structure
+### writeComponents (responses: Response[], customDir: ?string): Promise<{ component: Component, dependencies: Component[] }
+
+Takes responses and model them on the file system in components directory, returns a components array.
+
+The second argument is a custom directory (other then components direcotory on the current working directory)
+
+### importComponents (componentIds: string[]): Promise<{ component: Component, dependencies: Component[] }>
+
+performs fetch and then write.
+
+### Component is an object with the following structure
+
 ```json
 {
     "component": {

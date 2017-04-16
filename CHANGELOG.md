@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [unreleased]
 
+- change the public api to contain 3 seperate methods (fetchComponents, writeComponents && importComponents)
 - support "misc" attribute for resources files
 - write components to the file system after fetching them
 
