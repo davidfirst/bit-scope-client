@@ -1,14 +1,14 @@
 import R from 'ramda';
 import { componentDependencies } from './model-on-fs';
 import BitJson from './bit-json';
-import { ID_DELIMITER, COMPONENTS_DIRNAME } from './constants';
+import { ID_DELIMITER } from './constants';
 import { parseBitFullId } from './bit-id';
 
 const projectRoot = process.cwd();
 const load = () => BitJson.load(projectRoot);
 
 function saveDependenciesIfNeeded(componentIds: string[],
-                                         components: componentDependencies[]): Promise<*> {
+  components: componentDependencies[]): Promise<*> {
   return new Promise((resolve, reject) => {
     const projectBitJson = load();
     if (!componentIds || R.isEmpty(componentIds)) return resolve();
