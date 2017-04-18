@@ -1,7 +1,7 @@
 // @flow
 import R from 'ramda';
-import { ComponentObject } from './component/component-types';
-import Component from './component/component';
+import { ComponentObject } from '../component/component-types';
+import Component from '../component/component';
 
 export type componentDependencies = {
   component: ComponentObject;

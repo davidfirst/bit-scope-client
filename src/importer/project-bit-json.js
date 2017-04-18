@@ -1,8 +1,8 @@
 import R from 'ramda';
 import { componentDependencies } from './model-on-fs';
-import BitJson from './bit-json';
-import { ID_DELIMITER } from './constants';
-import { parseBitFullId } from './bit-id';
+import BitJson from '../bit-json';
+import { ID_DELIMITER } from '../constants';
+import { parseBitFullId } from '../bit-id';
 
 const projectRoot = process.cwd();
 const load = () => BitJson.load(projectRoot);

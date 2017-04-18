@@ -5,8 +5,8 @@ import sshClient from './ssh-client';
 import getRemote from './remote-getter/';
 import bit from 'bit-js';
 import { ID_DELIMITER, COMPONENTS_DIRNAME } from './constants';
-import modelOnFs from './model-on-fs';
-import projectBitJson from './project-bit-json';
+import modelOnFs from './importer/model-on-fs';
+import projectBitJson from './importer/project-bit-json';
 import Component from './component';
 import { type Response } from './ssh-client';
 
