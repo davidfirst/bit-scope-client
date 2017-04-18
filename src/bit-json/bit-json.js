@@ -19,13 +19,13 @@ class BitJson {
   packageDepndencies: ?{[string]: string};
   dependencyMap: ?DependencyMap;
 
-  constructor(bitJson: Object) {
-    this.impl = R.path(['sources', 'impl'], bitJson);
-    this.spec = R.path(['sources', 'spec'], bitJson);
-    this.misc = R.path(['sources', 'misc'], bitJson);
-    this.compiler = R.path(['env', 'compiler'], bitJson);
-    this.tester = R.path(['env', 'tester'], bitJson);
-    this.dependencies = R.prop('dependencies', bitJson);
+  constructor(bitJson: Object, defaultBitJson?: Object = {}) {
+    this.impl = R.path(['sources', 'impl'], bitJson) || defaultBitJson.impl;
+    this.spec = R.path(['sources', 'spec'], bitJson) || defaultBitJson.spec;
+    this.misc = R.path(['sources', 'misc'], bitJson) || defaultBitJson.misc;
+    this.compiler = R.path(['env', 'compiler'], bitJson) || defaultBitJson.compiler;
+    this.tester = R.path(['env', 'tester'], bitJson) || defaultBitJson.tester;
+    this.dependencies = R.prop('dependencies', bitJson) || defaultBitJson.dependencies;
     this.packageDepndencies = R.prop('packageDepndencies', bitJson);
     this.dependencyMap = null;
   }
@@ -86,7 +86,7 @@ class BitJson {
     );
   }
 
-  static load(bitPath: string): ?BitJson {
+  static load(bitPath: string, defaultBitJson?: Object = {}): ?BitJson {
     const readJson = p => JSON.parse(fs.readFileSync(p, 'utf8'));
     const composeBitJsonPath = p => path.join(p, BIT_JSON_NAME);
     const bitJsonPath = composeBitJsonPath(bitPath);
@@ -94,7 +94,7 @@ class BitJson {
     try {
       return new BitJson(readJson(bitJsonPath));
     } catch (e) {
-      if (e.code === 'ENOENT') return new BitJson({});
+      if (e.code === 'ENOENT') return new BitJson({}, defaultBitJson);
       throw new InvalidBitJsonException(e, bitJsonPath);
     }
   }
