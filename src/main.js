@@ -5,7 +5,8 @@ import sshClient from './ssh-client';
 import getRemote from './remote-getter/';
 import bit from 'bit-js';
 import { ID_DELIMITER, COMPONENTS_DIRNAME } from './constants';
-import modelOnFs from './model-on-fs';
+import modelOnFs from './importer/model-on-fs';
+import projectBitJson from './importer/project-bit-json';
 import Component from './component';
 import { type Response } from './ssh-client';
 
@@ -54,10 +55,16 @@ Promise<{ component: Component, dependencies: Component[] }> {
   return modelOnFs(componentDependencies, targetComponentsDir).then(() => componentDependencies);
 }
 
-const importComponents = (componentIds: string[]):
+const importComponents = (componentIds: string[], saveToBitJson: boolean = false):
 Promise<{ component: Component, dependencies: Component[] }> => {
-  return fetchComponents(componentIds)
+  const componentsP = fetchComponents(componentIds)
   .then(components => writeComponents(components));
+
+  if (saveToBitJson) {
+    return componentsP.then(components => projectBitJson.saveDependenciesIfNeeded(componentIds,
+      components));
+  }
+  return componentsP;
 };
 
 module.exports = {
