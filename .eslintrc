@@ -1,0 +1,12 @@
+{
+  "extends": ["plugin:flowtype/recommended", "airbnb-base"],
+  "parser": "babel-eslint",
+  "plugins": [
+    "flowtype"
+  ],
+   "settings": {
+    "flowtype": {
+      "onlyFilesWithFlowAnnotation": true
+    }
+  }
+}
