@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [unreleased]
 
+## [0.5.5] - 2017-05-09 rc
+
 - change the dist/dist.js constant to be dist/\<implFileName>
 
 ## [0.5.2]
