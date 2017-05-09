@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [unreleased]
 
+- change the dist/dist.js constant to be dist/\<implFileName>
+
 ## [0.5.2]
 
 - change the public api to contain 3 seperate methods (fetchComponents, writeComponents && importComponents)
