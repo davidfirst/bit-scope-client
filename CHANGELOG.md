@@ -7,13 +7,15 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [unreleased]
 
+- add a sync version of Component Resolver
+
 ## [0.5.5] - 2017-05-09 rc
 
 - change the dist/dist.js constant to be dist/\<implFileName>
 
 ## [0.5.2]
 
-- change the public api to contain 3 seperate methods (fetchComponents, writeComponents && importComponents)
+- change the public api to contain 3 separate methods (fetchComponents, writeComponents && importComponents)
 - support "misc" attribute for resources files
 - write components to the file system after fetching them
 
@@ -24,4 +26,4 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [0.5.0]
 
 - change ssh protocol in order to support bit version 0.5.0 +
-- now returns responsed with payload and header each
+- now returns response with payload and header each

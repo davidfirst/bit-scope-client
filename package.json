@@ -15,6 +15,7 @@
   "dependencies": {
     "bit-js": "^0.2.2",
     "fs-extra": "^2.1.2",
+    "glob": "^7.1.1",
     "is-array-buffer-x": "^1.1.0",
     "ramda": "^0.23.0",
     "sequest": "^0.9.0",
