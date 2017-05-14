@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [unreleased]
 
+## [0.5.12] - 2017-05-14 rc
+
 - add a sync version of Component Resolver
 
 ## [0.5.5] - 2017-05-09 rc
