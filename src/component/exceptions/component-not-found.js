@@ -5,5 +5,6 @@ export default class ComponentNotFound extends Error {
   constructor(id: string) {
     super();
     this.id = id;
+    this.name = ComponentNotFound.name;
   }
 }

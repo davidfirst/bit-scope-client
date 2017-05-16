@@ -5,13 +5,13 @@ import keyGetter from './ssh-key-getter';
 import parseComponentObjects from '../parse-component-objects';
 import populateComponent from '../populate-component';
 import { BIT_VERSION } from '../constants';
-
 import {
   RemoteScopeNotFound,
   NetworkError,
   UnexpectedNetworkError,
   PermissionDenied,
-  ComponentNotFound } from '../exceptions';
+} from '../exceptions';
+import ComponentNotFound from '../component/exceptions/component-not-found';
 
 type SSHUrl = {
   username: string,
@@ -49,7 +49,7 @@ function buildCommandMessage(payload: any): Response {
       version: BIT_VERSION
     }
   };
-};
+}
 
 function errorHandler(err, optionalId) {
   switch (err.code) {
