@@ -8,6 +8,7 @@ import InvalidBitJsonException from '../exceptions/invalid-bit-json';
 import DuplicateComponentException from '../exceptions/duplicate-component';
 
 const composePath = p => path.join(p, BIT_JSON_NAME);
+const readJson = p => JSON.parse(fs.readFileSync(p, 'utf8'));
 
 class BitJson {
   impl: ?string;
@@ -86,10 +87,19 @@ class BitJson {
     );
   }
 
+  static loadIfExists(bitPath: string): ?BitJson {
+    const bitJsonPath = composePath(bitPath);
+
+    try {
+      return new BitJson(readJson(bitJsonPath));
+    } catch (e) {
+      if (e.code === 'ENOENT') throw e;
+      throw new InvalidBitJsonException(e, bitJsonPath);
+    }
+  }
+
   static load(bitPath: string, defaultBitJson?: Object = {}): ?BitJson {
-    const readJson = p => JSON.parse(fs.readFileSync(p, 'utf8'));
-    const composeBitJsonPath = p => path.join(p, BIT_JSON_NAME);
-    const bitJsonPath = composeBitJsonPath(bitPath);
+    const bitJsonPath = composePath(bitPath);
 
     try {
       return new BitJson(readJson(bitJsonPath));

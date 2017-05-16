@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [unreleased]
 
+- add loadIfExists() to BitJson class so then it'll throw an error when bit.json is not there
+
 ## [0.6.0] - 2017-05-15
 
 - add a sync version of Component Resolver
