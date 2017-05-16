@@ -16,7 +16,7 @@ class BitJson {
   compiler: ?string;
   tester: ?string;
   dependencies: ?{[string]: string};
-  packageDepndencies: ?{[string]: string};
+  packageDependencies: ?{[string]: string};
   dependencyMap: ?DependencyMap;
 
   constructor(bitJson: Object, defaultBitJson?: Object = {}) {
@@ -26,7 +26,7 @@ class BitJson {
     this.compiler = R.path(['env', 'compiler'], bitJson) || defaultBitJson.compiler;
     this.tester = R.path(['env', 'tester'], bitJson) || defaultBitJson.tester;
     this.dependencies = R.prop('dependencies', bitJson) || defaultBitJson.dependencies;
-    this.packageDepndencies = R.prop('packageDepndencies', bitJson);
+    this.packageDependencies = R.prop('packageDependencies', bitJson);
     this.dependencyMap = null;
   }
 
@@ -60,7 +60,7 @@ class BitJson {
         tester: this.tester,
       },
       dependencies: this.dependencies,
-      packageDepndencies: this.packageDepndencies,
+      packageDependencies: this.packageDependencies,
     };
   }
 
