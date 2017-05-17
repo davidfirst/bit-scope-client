@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [unreleased]
 
+- importComponents returns a consistent object whether the save flag is set or not
+
 ## [0.6.0] - 2017-05-15
 
 - add a sync version of Component Resolver
