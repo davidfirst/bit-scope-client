@@ -62,7 +62,7 @@ Promise<{ component: Component, dependencies: Component[] }> => {
 
   if (saveToBitJson) {
     return componentsP.then(components => projectBitJson.saveDependenciesIfNeeded(componentIds,
-      components));
+      components).then(() => components));
   }
   return componentsP;
 };
