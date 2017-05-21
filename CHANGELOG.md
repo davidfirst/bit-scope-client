@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [unreleased]
 
-## [0.6.1] - 2017-05-21
+## [0.6.2] - 2017-05-21
 
 - add loadIfExists() to BitJson class so then it'll throw an error when bit.json is not there
 - importComponents returns a consistent object whether the save flag is set or not
