@@ -24,7 +24,7 @@ function getLatestVersion(bitId: BitId, componentsDir: string): number {
 
 function getRequiredFile(bitJson: BitJson): string {
   return !bitJson.compiler || bitJson.compiler !== NO_PLUGIN_TYPE ?
-    path.join(DEFAULT_DIST_DIRNAME, bitJson.impl) : bitJson.impl;
+    path.join(DEFAULT_DIST_DIRNAME, bitJson.distImplFileName) : bitJson.distImplFileName;
 }
 
 function resolvePath(componentId: string, projectRoot: string = process.cwd()): string {

@@ -43,3 +43,4 @@ export const DEFAULT_DIST_DIRNAME = 'dist';
 export const DEFAULT_BOXNAME = 'global';
 export const LATEST_BIT_VERSION = 'latest';
 export const LOCAL_SCOPE_NOTATION = '@this';
+export const DEFAULT_LANGUAGE = 'javascript';

@@ -2,7 +2,7 @@
 import R from 'ramda';
 import fs from 'fs-extra';
 import path from 'path';
-import { BIT_JSON_NAME, VERSION_DELIMITER, ID_DELIMITER } from '../constants';
+import { BIT_JSON_NAME, VERSION_DELIMITER, ID_DELIMITER, DEFAULT_LANGUAGE } from '../constants';
 import DependencyMap from '../dependency-map';
 import InvalidBitJsonException from '../exceptions/invalid-bit-json';
 import DuplicateComponentException from '../exceptions/duplicate-component';
@@ -16,6 +16,7 @@ class BitJson {
   misc: ?string[];
   compiler: ?string;
   tester: ?string;
+  lang: ?string;
   dependencies: ?{[string]: string};
   packageDependencies: ?{[string]: string};
   dependencyMap: ?DependencyMap;
@@ -26,9 +27,28 @@ class BitJson {
     this.misc = R.path(['sources', 'misc'], bitJson) || defaultBitJson.misc;
     this.compiler = R.path(['env', 'compiler'], bitJson) || defaultBitJson.compiler;
     this.tester = R.path(['env', 'tester'], bitJson) || defaultBitJson.tester;
+    this.lang = R.prop('lang', bitJson) || DEFAULT_LANGUAGE;
     this.dependencies = R.prop('dependencies', bitJson) || defaultBitJson.dependencies;
     this.packageDependencies = R.prop('packageDependencies', bitJson);
     this.dependencyMap = null;
+  }
+
+  getFileExtension(): string {
+    switch (this.lang) {
+      case DEFAULT_LANGUAGE:
+      default:
+        return 'js';
+    }
+  }
+
+  get distImplFileName(): string {
+    const baseImplName = path.parse(this.impl).name;
+    return `${baseImplName}.${this.getFileExtension()}`;
+  }
+
+  get distSpecFileName(): string {
+    const baseSpecName = path.parse(this.spec).name;
+    return `${baseSpecName}.${this.getFileExtension()}`;
   }
 
   getDependenciesArray(): string[] {

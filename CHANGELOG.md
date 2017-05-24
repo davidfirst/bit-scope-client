@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [unreleased]
 
+- file-extension of the dist file is based on the language defined in bit.json
+
 ## [0.6.2] - 2017-05-21
 
 - add loadIfExists() to BitJson class so then it'll throw an error when bit.json is not there
